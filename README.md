@@ -13,8 +13,8 @@ This demo illustrates how ESI and Spring MVC remote view resolution can be combi
 
 ## Preliminaries
 
-PHP >= 5.4: needed for running a simple php test server to simulate our CMS
-mvn == 3.0.5: needed to build & run the java sample web application
+PHP >= 5.4: needed for running a simple php test server to simulate our CMS  
+mvn == 3.0.5: needed to build & run the java sample web application  
 varnish >= 4: for ESI and url-rewriting
 
 ## Running the demo
