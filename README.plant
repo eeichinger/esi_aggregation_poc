@@ -1,0 +1,25 @@
+
+
+@startuml sampleflow.png
+
+title "Master First" Request Flow
+
+hide footbox
+
+actor Browser
+Browser -> Varnish: GET /sampleapp/<url>
+Varnish -> SampleApp: GET /<url>
+
+alt load from remote CMS
+SampleApp -> WCMS: GET /master/sampleweb/layout/<pagelayout>.html
+'WCMS -> SampleApp: <html>...<div th:replace="${templateName}" />...</html>
+else load from local filesystem
+SampleApp -> SampleApp: load from local filesystem /WEB-INF/layout/<pagelayout>.html
+end
+SampleApp -> SampleApp: render page
+
+SampleApp --> Varnish: <html>\n...\n<esi:include src="/master/header.html" />\n...\n<esi:include src="/master/footer.html" />\n...\n</html>
+Varnish -> WCMS: GET /master/header.html
+Varnish -> WCMS: GET /master/footer.html
+Varnish --> Browser: <html>\nHEADER-CONTENT\n...\nAPP-CONTENT\n...\nFOOTER-CONTENT\n\</html>
+@enduml

@@ -3,7 +3,7 @@
 
 This demo illustrates how ESI and Spring MVC remote view resolution can be combined in a flexible content view aggregation but still allowing central maintenance of those views.
 
-## Features
+## How it works
 
 * the web application fetches all templates from the central server, only falling back to local copies if necessary
 * Either serve the template to the web application through varnish Varnish or let the application fetch it from the CMS directly. Varnish allows to serve different master templates to different websites by e.g. url rewriting
@@ -11,10 +11,12 @@ This demo illustrates how ESI and Spring MVC remote view resolution can be combi
 * The HTML returned by the application to varnish contains ESI include tags to be resolved. Varnish resolves those tags and returns the aggregated page to the browser
 * Using Varnish's url-rewriting, we can introduce a distinguished namespace for each application.
 
+![Sample Flow](sampleflow.png)
+
 ## Preliminaries
 
-PHP >= 5.4: needed for running a simple php test server to simulate our CMS  
-mvn == 3.0.5: needed to build & run the java sample web application  
+PHP >= 5.4: needed for running a simple php test server to simulate our CMS
+mvn == 3.0.5: needed to build & run the java sample web application
 varnish >= 4: for ESI and url-rewriting
 
 ## Running the demo
@@ -38,16 +40,16 @@ this is coming from the master-footer via ESI
 
 1. Override the application's own content template with the CMS'
 
-	In ./cmssimulated/master/ rename home.html.ignore to home.html. The application always checks the CMS first when resolving a template. Refresh the browser and it should now show  
-	
+	In ./cmssimulated/master/ rename home.html.ignore to home.html. The application always checks the CMS first when resolving a template. Refresh the browser and it should now show
+
 	```
 Hello from REMOTE content!!!
 	```
 
 2. Shut down the CMS
-	
+
 	e.g. `pkill php` to shut down the CMS. As long as the web applications fetch their templates directly from the CMS, an unresponsive CMS will cause the application to fall back to using it's baked-in templates. Kill our "CMS" and you should see
-	
+
 	```
 Hello from Master
 Hello from Content!
