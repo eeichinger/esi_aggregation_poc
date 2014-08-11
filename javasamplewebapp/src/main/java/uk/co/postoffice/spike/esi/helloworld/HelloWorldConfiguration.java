@@ -24,7 +24,7 @@ public class HelloWorldConfiguration extends WebMvcConfigurationSupport {
     public ThymeleafViewResolver thymeleafViewResolver() {
         final TemplateResolver urlTemplateResolver = new org.thymeleaf.templateresolver.UrlTemplateResolver() {{
             setOrder(10);
-            setPrefix("http://cms.postoffice.test.uk:1234/");
+            setPrefix("http://cms.127.0.0.1.xip.io:1234/");
             setSuffix(".html");
             setTemplateMode("HTML5");
             setCharacterEncoding("UTF-8");

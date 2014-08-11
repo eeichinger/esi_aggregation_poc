@@ -22,19 +22,6 @@ sub vcl_recv {
     set req.http.Host = "pol-cms-cdps-ci-dev-pub-one.192.168.20.20.xip.io";
     set req.url = regsub(req.url, "^/", "/dam/templates/");
 	}
-	
-/*
-  if (req.url ~ "^/sampleapp/")  {
-		// check for browser client requests to our "sampleapp"
-    set req.backend_hint=appserver;		
-    set req.url = regsub(req.url, "^/sampleapp/", "/");
-  } else if (req.url ~ "^/master/\w+/") {
-	  // this is an app asking for a template. Point it to the default masters
-    set req.backend_hint=contentserver;
-    set req.http.host = "pol-cms-cdps-ci-dev-pub-one.192.168.20.20.xip.io";
-    set req.url = regsub(req.url, "^/master/\w+/", "/master/");
-	}
-*/
 }
 
 sub vcl_backend_response {
